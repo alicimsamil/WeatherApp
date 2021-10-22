@@ -25,6 +25,15 @@ class SplashScreenFragment : Fragment() {
             viewModel.internetStatusCheck(it)
         }
 
+        observeInternet()
+
+
+    }
+
+
+
+
+    fun observeInternet(){
         viewModel.internetStatus.observe(viewLifecycleOwner, Observer {
             if (it){
                 Toast.makeText(context,"İnternet bağlantısı var.",Toast.LENGTH_LONG).show()
@@ -39,14 +48,16 @@ class SplashScreenFragment : Fragment() {
 
         })
 
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -13,7 +13,6 @@ import android.os.Build
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
         val network = connectivityManager.activeNetwork ?: return false
-
         val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
 
         return when {
@@ -27,7 +26,6 @@ import android.os.Build
 
         @Suppress("DEPRECATION") val networkInfo = connectivityManager.activeNetworkInfo ?: return false
         @Suppress("DEPRECATION") return networkInfo.isConnected
-
 
     }
 
