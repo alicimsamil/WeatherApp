@@ -6,7 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 
 
-private fun internetCheck(context: Context) : Boolean{
+    suspend fun internetCheck(context: Context) : Boolean{
 
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

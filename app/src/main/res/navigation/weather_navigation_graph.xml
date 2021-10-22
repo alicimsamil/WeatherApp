@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreen">
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.alicimsamil.weatherapp.ui.screens.SplashScreen"
+        android:name="com.alicimsamil.weatherapp.ui.screens.Splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" />
 </navigation>
