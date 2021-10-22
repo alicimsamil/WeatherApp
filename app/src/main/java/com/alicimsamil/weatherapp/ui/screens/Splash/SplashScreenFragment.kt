@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class SplashScreenFragment : Fragment() {
     private val viewModel: SplashScreenViewModel by viewModels()
@@ -27,8 +26,17 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeInternet()
-        observeLocation()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            observeInternet()
+            observeLocation()
+            delay(5000)
+
+            val action = SplashScreenFragmentDirections.actionSplashScreenToMainFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+
+
 
     }
 
