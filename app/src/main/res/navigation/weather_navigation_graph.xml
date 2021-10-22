@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/weather_navigation_graph">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_navigation_graph"
+    app:startDestination="@id/splashScreen">
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.alicimsamil.weatherapp.ui.screens.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" />
 </navigation>
