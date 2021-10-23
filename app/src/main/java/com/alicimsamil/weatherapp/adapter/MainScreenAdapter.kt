@@ -16,7 +16,7 @@ class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_shape,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.location_recycler_shape,parent,false)
         return MainViewHolder(itemView)
     }
 
