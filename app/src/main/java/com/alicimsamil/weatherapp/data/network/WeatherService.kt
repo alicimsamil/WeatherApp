@@ -20,11 +20,11 @@ interface WeatherService {
     companion object {
 
         val BASE_URL="https://www.metaweather.com"
-        var retrofitService : WeatherService? = null
+        var weatherService : WeatherService? = null
 
         fun getInstance() : WeatherService{
 
-            if (retrofitService == null){
+            if (weatherService == null){
 
                 val retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -32,11 +32,11 @@ interface WeatherService {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
 
-                retrofitService = retrofit.create(WeatherService::class.java)
+                weatherService = retrofit.create(WeatherService::class.java)
 
             }
 
-            return retrofitService!!
+            return weatherService!!
 
         }
 
