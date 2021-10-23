@@ -13,7 +13,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 
-class MainFragmentViewModel(private val repository: WeatherRepository) : ViewModel() {
+class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel() {
 
     val locations = MutableLiveData<List<LocationsModel>>()
     val errorMessage = MutableLiveData<String>()

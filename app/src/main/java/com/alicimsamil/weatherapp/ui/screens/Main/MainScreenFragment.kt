@@ -14,12 +14,12 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.MainScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
-import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainFragmentViewModel
+import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainViewModelFactory
 
 class MainScreenFragment : Fragment() {
     val args:MainScreenFragmentArgs by navArgs()
-    private lateinit var viewModel: MainFragmentViewModel
+    private lateinit var viewModel: MainScreenViewModel
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: MainScreenAdapter
     override fun onCreateView(
@@ -34,7 +34,7 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,
             MainViewModelFactory(WeatherRepository(WeatherRetrofit()))
-        ).get(MainFragmentViewModel::class.java)
+        ).get(MainScreenViewModel::class.java)
         recyclerView = view.findViewById(R.id.mainRecyclerView)
         val linearLayout = LinearLayoutManager(context)
         recyclerView.layoutManager=linearLayout

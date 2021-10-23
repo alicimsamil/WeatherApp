@@ -39,8 +39,7 @@ class DetailScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, DetailViewModelFactory(WeatherRepository(WeatherRetrofit()))).get(
-            DetailScreenViewModel::class.java)
+        viewModel = ViewModelProvider(this, DetailViewModelFactory(WeatherRepository(WeatherRetrofit()))).get(DetailScreenViewModel::class.java)
         celsiusTextView = view.findViewById<TextView>(R.id.celsiusValue)
         minMaxValueTextView = view.findViewById<TextView>(R.id.minMaxValue)
         weatherIconImageView = view.findViewById<ImageView>(R.id.weatherIcon)
