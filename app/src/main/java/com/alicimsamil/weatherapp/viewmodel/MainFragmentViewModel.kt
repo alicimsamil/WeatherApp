@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class MainFragmentViewModel(private val repository: WeatherRepository) : ViewModel() {
 
-    val locations = MutableLiveData<ArrayList<LocationsModel>>()
+    val locations = MutableLiveData<List<LocationsModel>>()
+    val errorMessage = MutableLiveData<String>()
     private val disposable=CompositeDisposable()
 
     fun getLocations(context:Context, location:String){
@@ -29,13 +30,13 @@ class MainFragmentViewModel(private val repository: WeatherRepository) : ViewMod
                 repository.getLocations(location)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(object : DisposableSingleObserver<ArrayList<LocationsModel>>() {
-                        override fun onSuccess(t: ArrayList<LocationsModel>) {
+                    .subscribeWith(object : DisposableSingleObserver<List<LocationsModel>>() {
+                        override fun onSuccess(t: List<LocationsModel>) {
                             locations.value = t
                         }
 
                         override fun onError(e: Throwable) {
-                            TODO("Not yet implemented")
+                            errorMessage.value=e.message
                         }
 
                     })

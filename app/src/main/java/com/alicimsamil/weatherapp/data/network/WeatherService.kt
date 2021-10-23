@@ -11,6 +11,6 @@ import retrofit2.http.Query
 interface WeatherService {
 
     @GET("/api/location/search")
-    fun getLocations(@Query("lattlong") lattlong : String): Single<ArrayList<LocationsModel>>
+    fun getLocations(@Query("lattlong") lattlong : String): Single<List<LocationsModel>>
 
 }

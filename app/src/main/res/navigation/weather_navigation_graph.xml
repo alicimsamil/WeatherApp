@@ -17,5 +17,9 @@
         android:id="@+id/mainFragment"
         android:name="com.alicimsamil.weatherapp.ui.screens.Main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <argument
+            android:name="latlng"
+            app:argType="string" />
+    </fragment>
 </navigation>

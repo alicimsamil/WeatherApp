@@ -29,11 +29,9 @@ class SplashScreenFragment : Fragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             observeInternet()
+            delay(3000)
             observeLocation()
-            delay(5000)
 
-            val action = SplashScreenFragmentDirections.actionSplashScreenToMainFragment()
-            Navigation.findNavController(view).navigate(action)
         }
 
 
@@ -67,6 +65,9 @@ class SplashScreenFragment : Fragment() {
         }
         viewModel.location.observe(viewLifecycleOwner, Observer {
             println(it.latitude)
+            val lltlng = it.latitude.toString()+","+it.longitude.toString()
+            val action = SplashScreenFragmentDirections.actionSplashScreenToMainFragment(lltlng)
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
         })
     }
 
