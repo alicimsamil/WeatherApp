@@ -8,6 +8,7 @@
     android:background="@drawable/location_button_shape"
     android:layout_marginHorizontal="15dp"
     android:layout_marginVertical="5dp"
+    android:id="@+id/locationButton"
     >
 
 

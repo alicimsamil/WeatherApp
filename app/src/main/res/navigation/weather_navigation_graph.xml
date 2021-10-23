@@ -21,5 +21,17 @@
         <argument
             android:name="latlng"
             app:argType="string" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailScreenFragment"
+            app:destination="@id/detailScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailScreenFragment"
+        android:name="com.alicimsamil.weatherapp.ui.screens.Detail.DetailScreenFragment"
+        android:label="fragment_detail_screen"
+        tools:layout="@layout/fragment_detail_screen" >
+        <argument
+            android:name="woeid"
+            app:argType="string" />
     </fragment>
 </navigation>

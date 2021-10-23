@@ -1,0 +1,60 @@
+package com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel
+
+import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.alicimsamil.weatherapp.data.repository.WeatherRepository
+import com.alicimsamil.weatherapp.model.LocationsModel
+import com.alicimsamil.weatherapp.model.WeatherModel
+import com.alicimsamil.weatherapp.util.internetCheck
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
+
+class DetailScreenViewModel(private val repository: WeatherRepository) : ViewModel() {
+
+    val weatherModel = MutableLiveData<WeatherModel>()
+    val errorMessage = MutableLiveData<String>()
+    private val disposable= CompositeDisposable()
+
+    fun getWeather(context: Context,woeid:String){
+
+        viewModelScope.launch {
+
+            if (internetCheck(context)) {
+
+                disposable.add(
+
+                    repository.getWeatherStatus(woeid)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(object : DisposableSingleObserver<WeatherModel>() {
+                            override fun onSuccess(t: WeatherModel) {
+                                weatherModel.value=t
+                            }
+
+                            override fun onError(e: Throwable) {
+                                errorMessage.value=e.message
+                            }
+
+                        })
+                )
+
+            }
+
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+}

@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.model.LocationsModel
+import com.alicimsamil.weatherapp.ui.screens.Main.MainScreenFragmentDirections
 
 class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
     var locations = listOf<LocationsModel>()
@@ -21,7 +24,14 @@ class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.locationTitle).text=locations.get(position).title
+        val locationText= holder.itemView.findViewById<TextView>(R.id.locationTitle)
+        val locationButton = holder.itemView.findViewById<ConstraintLayout>(R.id.locationButton)
+        locationText.text=locations.get(position).title
+        locationButton.setOnClickListener {
+            val action=MainScreenFragmentDirections.actionMainFragmentToDetailScreenFragment(locations.get(position).woeid.toString())
+            Navigation.findNavController(it).navigate(action)
+        }
+
     }
 
     override fun getItemCount(): Int {

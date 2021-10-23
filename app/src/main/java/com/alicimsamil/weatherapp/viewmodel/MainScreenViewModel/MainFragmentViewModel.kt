@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.viewmodel
+package com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData

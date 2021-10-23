@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.viewmodel
+package com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel
 
 import android.Manifest
 import android.app.Activity

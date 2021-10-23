@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.alicimsamil.weatherapp.R
-import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel
+import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel.SplashScreenViewModel
 import kotlinx.coroutines.*
 
 class SplashScreenFragment : Fragment() {

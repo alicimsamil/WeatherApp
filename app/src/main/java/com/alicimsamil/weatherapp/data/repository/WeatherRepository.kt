@@ -5,7 +5,8 @@ import com.alicimsamil.weatherapp.data.network.WeatherService
 
 class WeatherRepository(private val weatherRetrofit: WeatherRetrofit) {
 
-    fun getLocations(location:String) = weatherRetrofit.apiService().getLocations(location)
+    fun getLocations(location : String) = weatherRetrofit.apiService().getLocations(location)
+    fun getWeatherStatus(woeid : String) = weatherRetrofit.apiService().getWeatherStatus(woeid)
 
 
 }
