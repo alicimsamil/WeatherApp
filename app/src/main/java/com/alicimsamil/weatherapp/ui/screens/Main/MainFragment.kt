@@ -29,24 +29,26 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,MyViewModelFactory(WeatherRepository(WeatherRetrofit()))).get(MainFragmentViewModel::class.java)
 
+        observeLocations()
+
+
+
+    }
+
+    fun observeLocations(){
+
         context?.let {
             viewModel.getLocations(it,"38.3513,38.3280")
         }
 
         viewModel.locations.observe(viewLifecycleOwner, Observer {
-
             it.forEach {
-
                 println(it.title)
-
             }
-
-
         })
 
-
-
     }
+
 
 
 }
