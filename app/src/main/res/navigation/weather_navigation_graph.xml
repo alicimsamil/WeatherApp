@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.alicimsamil.weatherapp.ui.screens.Main.MainFragment"
+        android:name="com.alicimsamil.weatherapp.ui.screens.Main.MainScreenFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <argument

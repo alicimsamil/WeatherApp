@@ -17,8 +17,8 @@ import com.alicimsamil.weatherapp.data.repository.WeatherRepository
 import com.alicimsamil.weatherapp.viewmodel.MainFragmentViewModel
 import com.alicimsamil.weatherapp.viewmodel.MyViewModelFactory
 
-class MainFragment : Fragment() {
-    val args:MainFragmentArgs by navArgs()
+class MainScreenFragment : Fragment() {
+    val args:MainScreenFragmentArgs by navArgs()
     private lateinit var viewModel: MainFragmentViewModel
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: MainScreenAdapter
