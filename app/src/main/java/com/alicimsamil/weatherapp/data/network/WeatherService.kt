@@ -10,35 +10,7 @@ import retrofit2.http.Query
 
 interface WeatherService {
 
-
     @GET("/api/location/search")
     fun getLocations(@Query("lattlong") lattlong : String): Single<ArrayList<LocationsModel>>
 
-
-
-
-    companion object {
-
-        val BASE_URL="https://www.metaweather.com"
-        var weatherService : WeatherService? = null
-
-        fun getInstance() : WeatherService{
-
-            if (weatherService == null){
-
-                val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
-
-                weatherService = retrofit.create(WeatherService::class.java)
-
-            }
-
-            return weatherService!!
-
-        }
-
-    }
 }
