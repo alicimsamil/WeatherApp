@@ -27,22 +27,22 @@ class DetailScreenAdapter(val context: Context) : RecyclerView.Adapter<DetailVie
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         val weatherIconImageView=holder.itemView.findViewById<ImageView>(R.id.dailyWeatherIcon)
-        holder.itemView.findViewById<TextView>(R.id.dailyWeatherCelcius).text=weather.get(position).the_temp.toInt().toString()+"°C"
+        holder.itemView.findViewById<TextView>(R.id.dailyWeatherCelcius).text="${weather.get(position).the_temp.toInt()}°C"
 
         when(weather.get(position).weather_state_abbr){
 
-            "sn" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.sn))
-            "sl" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.sl))
-            "h" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.h))
-            "r" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.t))
-            "hr" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.hr))
-            "lr" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.lr))
-            "s" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.s))
-            "hc" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.hc))
-            "lc" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.lc))
-            "c" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.c))
+            "sn" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.sn,context?.theme))
+            "sl" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.sl,context?.theme))
+            "h" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.h,context?.theme))
+            "r" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.t,context?.theme))
+            "hr" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.hr,context?.theme))
+            "lr" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.lr,context?.theme))
+            "s" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.s,context?.theme))
+            "hc" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.hc,context?.theme))
+            "lc" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.lc,context?.theme))
+            "c" -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.c,context?.theme))
 
-            else -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.c))
+            else -> weatherIconImageView.setImageDrawable(context.resources.getDrawable(R.drawable.c,context?.theme))
         }
     }
 

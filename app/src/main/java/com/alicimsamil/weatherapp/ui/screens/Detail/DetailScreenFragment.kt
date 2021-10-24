@@ -1,5 +1,6 @@
 package com.alicimsamil. weatherapp.ui.screens.Detail
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,24 +73,24 @@ class DetailScreenFragment : Fragment() {
         viewModel.weatherModel.observe(viewLifecycleOwner, Observer {
             val todayWeather = it.consolidated_weather.get(0)
 
-            celsiusTextView.text  =todayWeather.the_temp.toInt().toString()+"°C"
-            minMaxValueTextView.text="Min/Maks Sıcaklık: "+todayWeather.min_temp.toInt().toString()+"°C / "+todayWeather.max_temp.toInt().toString()+"°C"
+            celsiusTextView.text  ="${todayWeather.the_temp.toInt()}°C"
+            minMaxValueTextView.text="Min/Maks Sıcaklık: ${todayWeather.min_temp.toInt()}°C / ${todayWeather.max_temp.toInt()}°C"
             humidityTextView.text="Nem Oranı: ${todayWeather.humidity}"
 
             when(todayWeather.weather_state_abbr){
 
-                "sn" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sn))
-                "sl" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sl))
-                "h" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.h))
-                "r" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.t))
-                "hr" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.hr))
-                "lr" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.lr))
-                "s" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.s))
-                "hc" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.hc))
-                "lc" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.lc))
-                "c" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.c))
+                "sn" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sn,context?.theme))
+                "sl" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sl,context?.theme))
+                "h" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.h,context?.theme))
+                "r" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.t,context?.theme))
+                "hr" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.hr,context?.theme))
+                "lr" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.lr,context?.theme))
+                "s" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.s,context?.theme))
+                "hc" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.hc,context?.theme))
+                "lc" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.lc,context?.theme))
+                "c" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.c,context?.theme))
 
-                else -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.c))
+                else -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.c,context?.theme))
             }
 
             adapter.weather=it.consolidated_weather.subList(1,6)

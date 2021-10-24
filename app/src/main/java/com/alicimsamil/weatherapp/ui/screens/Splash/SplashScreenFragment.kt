@@ -1,5 +1,7 @@
 package com.alicimsamil.weatherapp.ui.screens.Splash
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import androidx.navigation.Navigation
 import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel.SplashScreenViewModel
 import kotlinx.coroutines.*
+import kotlin.system.exitProcess
 
 class SplashScreenFragment : Fragment() {
     private val viewModel: SplashScreenViewModel by viewModels()
@@ -29,7 +32,6 @@ class SplashScreenFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             observeInternet()
             delay(3000)
-            observeLocation()
         }
 
     }
@@ -42,10 +44,16 @@ class SplashScreenFragment : Fragment() {
         }
         viewModel.internetStatus.observe(viewLifecycleOwner, Observer {
             if (it){
-
+                observeLocation()
             }
             else if(!it){
-                Toast.makeText(context,"İnternet bağlantısı yok! Bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show()
+                val alertDialog = AlertDialog.Builder(context)
+                alertDialog.setTitle("İnternet Bağlantısı")
+                alertDialog.setMessage("İnternete bağlanılamadı.")
+                alertDialog.setPositiveButton("Çıkış Yap"){ dialog, which ->
+                    exitProcess(-1)
+                }
+                alertDialog.show()
             }
 
         })
