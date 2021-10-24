@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.Detail
+package com.alicimsamil. weatherapp.ui.screens.Detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,9 +23,11 @@ import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailViewMode
 class DetailScreenFragment : Fragment() {
 
     val args: DetailScreenFragmentArgs by navArgs()
-    private lateinit var viewModel: DetailScreenViewModel
+    private lateinit var viewModel : DetailScreenViewModel
     private lateinit var celsiusTextView : TextView
     private lateinit var minMaxValueTextView : TextView
+    private lateinit var cityTextView : TextView
+    private lateinit var humidityTextView : TextView
     private lateinit var weatherIconImageView : ImageView
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: DetailScreenAdapter
@@ -40,17 +42,19 @@ class DetailScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, DetailViewModelFactory(WeatherRepository(WeatherRetrofit()))).get(DetailScreenViewModel::class.java)
-        celsiusTextView = view.findViewById<TextView>(R.id.celsiusValue)
-        minMaxValueTextView = view.findViewById<TextView>(R.id.minMaxValue)
-        weatherIconImageView = view.findViewById<ImageView>(R.id.weatherIcon)
+        observeWeather()
+        celsiusTextView = view.findViewById(R.id.celsiusValue)
+        minMaxValueTextView = view.findViewById(R.id.minMaxValue)
+        cityTextView = view.findViewById(R.id.weatherCity)
+        humidityTextView = view.findViewById(R.id.humidityTextView)
+        weatherIconImageView = view.findViewById(R.id.weatherIcon)
         recyclerView = view.findViewById(R.id.detailRecyclerView)
+        cityTextView.text=args.city
+
         val linearLayout = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-        recyclerView.layoutManager=linearLayout
+        recyclerView.layoutManager =linearLayout
         adapter = context?.let { DetailScreenAdapter(it) }!!
         recyclerView.adapter=adapter
-        observeWeather()
-
-
 
     }
 
@@ -68,13 +72,10 @@ class DetailScreenFragment : Fragment() {
         viewModel.weatherModel.observe(viewLifecycleOwner, Observer {
             val todayWeather = it.consolidated_weather.get(0)
 
-            celsiusTextView.text=todayWeather.the_temp.toInt().toString()+"°C"
+            celsiusTextView.text  =todayWeather.the_temp.toInt().toString()+"°C"
             minMaxValueTextView.text="Min/Maks Sıcaklık: "+todayWeather.min_temp.toInt().toString()+"°C / "+todayWeather.max_temp.toInt().toString()+"°C"
+            humidityTextView.text="Nem Oranı: ${todayWeather.humidity}"
 
-            it.consolidated_weather.forEach {
-                println(it.the_temp)
-
-            }
             when(todayWeather.weather_state_abbr){
 
                 "sn" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sn))

@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="12°C"
         android:textColor="@color/white"
-        android:textSize="44sp"
+        android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

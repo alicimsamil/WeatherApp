@@ -42,7 +42,7 @@ class SplashScreenFragment : Fragment() {
         }
         viewModel.internetStatus.observe(viewLifecycleOwner, Observer {
             if (it){
-                Toast.makeText(context,"İnternet bağlantısı var.",Toast.LENGTH_LONG).show()
+
             }
             else if(!it){
                 Toast.makeText(context,"İnternet bağlantısı yok! Bağlantınızı kontrol ediniz.",Toast.LENGTH_LONG).show()

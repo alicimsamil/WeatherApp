@@ -28,7 +28,7 @@ class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
         val locationButton = holder.itemView.findViewById<ConstraintLayout>(R.id.locationButton)
         locationText.text=locations.get(position).title
         locationButton.setOnClickListener {
-            val action=MainScreenFragmentDirections.actionMainFragmentToDetailScreenFragment(locations.get(position).woeid.toString())
+            val action=MainScreenFragmentDirections.actionMainFragmentToDetailScreenFragment(locations.get(position).woeid.toString(),locations.get(position).title)
             Navigation.findNavController(it).navigate(action)
         }
 
