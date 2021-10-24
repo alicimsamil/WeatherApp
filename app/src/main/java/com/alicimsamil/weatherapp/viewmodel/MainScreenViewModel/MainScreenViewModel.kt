@@ -17,6 +17,7 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
 
     val locations = MutableLiveData<List<LocationsModel>>()
     val errorMessage = MutableLiveData<String>()
+    val internetCheckData = MutableLiveData<Boolean>()
     private val disposable=CompositeDisposable()
 
     fun getLocations(context:Context, location:String){
@@ -25,6 +26,7 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
 
         if (internetCheck(context)) {
 
+            internetCheckData.value=true
             disposable.add(
 
                 repository.getLocations(location)
@@ -42,6 +44,9 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
                     })
             )
 
+        }
+        else{
+            internetCheckData.value=false
         }
 
     }

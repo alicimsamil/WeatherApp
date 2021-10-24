@@ -18,6 +18,7 @@ class DetailScreenViewModel(private val repository: WeatherRepository) : ViewMod
 
     val weatherModel = MutableLiveData<WeatherModel>()
     val errorMessage = MutableLiveData<String>()
+    val internetCheckData = MutableLiveData<Boolean>()
     private val disposable= CompositeDisposable()
 
     fun getWeather(context: Context,woeid:String){
@@ -26,8 +27,8 @@ class DetailScreenViewModel(private val repository: WeatherRepository) : ViewMod
 
             if (internetCheck(context)) {
 
+                internetCheckData.value=true
                 disposable.add(
-
                     repository.getWeatherStatus(woeid)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -35,7 +36,6 @@ class DetailScreenViewModel(private val repository: WeatherRepository) : ViewMod
                             override fun onSuccess(t: WeatherModel) {
                                 weatherModel.value=t
                             }
-
                             override fun onError(e: Throwable) {
                                 errorMessage.value=e.message
                             }
@@ -43,18 +43,11 @@ class DetailScreenViewModel(private val repository: WeatherRepository) : ViewMod
                         })
                 )
 
+            } else{
+                internetCheckData.value=false
             }
 
         }
 
-
-
-
-
-
     }
-
-
-
-
 }

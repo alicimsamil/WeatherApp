@@ -7,46 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.screens.Detail.DetailScreenFragment">
 
-    <ImageView
-        android:id="@+id/weatherIcon"
-        android:layout_width="91dp"
-        android:layout_height="87dp"
-        android:src="@drawable/s"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
-
-    <TextView
-        android:id="@+id/celsiusValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12°C"
-        android:textColor="@color/black"
-        android:textSize="55sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherIcon"
-        app:layout_constraintVertical_bias="0.029" />
-
-    <TextView
-        android:id="@+id/minMaxValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="364dp"
-        android:text="Min/Maks Sıcaklık: 6°C / 15°C"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/celsiusValue"
-        app:layout_constraintVertical_bias="0.275" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detailRecyclerView"
         android:layout_width="match_parent"
@@ -57,72 +17,106 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minMaxValue"
-        app:layout_constraintVertical_bias="0.747" />
+        app:layout_constraintVertical_bias="0.796" />
 
-    <TextView
-        android:id="@+id/weeklyWeatherStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Haftalık Hava Durumu"
-        android:textColor="#090909"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="91dp"
+        android:layout_height="87dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintVertical_bias="0.136"
+        tools:src="@drawable/c" />
+
+    <TextView
+        android:id="@+id/celsiusValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherIcon"
+        app:layout_constraintVertical_bias="0.03" />
+
+    <TextView
+        android:id="@+id/minMaxValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="364dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/celsiusValue"
+        app:layout_constraintVertical_bias="0.388" />
 
     <TextView
         android:id="@+id/weatherCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="İstanbul"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/locationWeatherIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintStart_toEndOf="@+id/locationWeatherIcon"
         app:layout_constraintTop_toTopOf="@+id/locationWeatherIcon"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/locationWeatherIcon"
         android:layout_width="24dp"
         android:layout_height="22dp"
-        android:src="@drawable/location"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.048"
+        tools:src="@drawable/location" />
 
     <TextView
         android:id="@+id/humidityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nem Oranı: 15"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toEndOf="@+id/humidityImageView"
         app:layout_constraintTop_toBottomOf="@+id/minMaxValue"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.04" />
 
     <ImageView
         android:id="@+id/humidityImageView"
         android:layout_width="28dp"
         android:layout_height="30dp"
-        android:src="@drawable/humidity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minMaxValue"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.04"
+        tools:src="@drawable/humidity" />
+
+    <TextView
+        android:id="@+id/weeklyWeatherStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.606" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

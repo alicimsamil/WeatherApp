@@ -1,5 +1,6 @@
 package com.alicimsamil.weatherapp.ui.screens.Main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
 import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainViewModelFactory
+import kotlin.system.exitProcess
 
 class MainScreenFragment : Fragment() {
     val args:MainScreenFragmentArgs by navArgs()
@@ -45,6 +47,19 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun observeLocations(){
+
+        viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
+            if (!it) {
+                val alertDialog = AlertDialog.Builder(context)
+                alertDialog.setTitle("İnternet Bağlantısı")
+                alertDialog.setMessage("İnternete bağlanılamadı.")
+                alertDialog.setPositiveButton("Çıkış Yap") { dialog, which ->
+                    exitProcess(-1)
+                }
+                alertDialog.show()
+            }
+
+        })
 
         context?.let {
             viewModel.getLocations(it,args.latlng)
