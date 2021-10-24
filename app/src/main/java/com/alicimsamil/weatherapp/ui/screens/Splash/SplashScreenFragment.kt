@@ -1,7 +1,6 @@
 package com.alicimsamil.weatherapp.ui.screens.Splash
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -67,7 +66,6 @@ class SplashScreenFragment : Fragment() {
             viewModel.getLocation(it)
         }
         viewModel.location.observe(viewLifecycleOwner, Observer {
-            println(it.latitude)
             val lltlng = it.latitude.toString()+","+it.longitude.toString()
             val action = SplashScreenFragmentDirections.actionSplashScreenToMainFragment(lltlng)
             view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }

@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_mainFragment_to_detailScreenFragment"
             app:destination="@id/detailScreenFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchScreenFragment"
+            app:destination="@id/searchScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailScreenFragment"
@@ -36,5 +39,14 @@
         <argument
             android:name="city"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchScreenFragment"
+        android:name="com.alicimsamil.weatherapp.ui.screens.Search.SearchScreenFragment"
+        android:label="fragment_search_screen"
+        tools:layout="@layout/fragment_search_screen" >
+        <action
+            android:id="@+id/action_searchScreenFragment_to_detailScreenFragment"
+            app:destination="@id/detailScreenFragment" />
     </fragment>
 </navigation>
