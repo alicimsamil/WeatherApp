@@ -18,15 +18,16 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
     val locations = MutableLiveData<List<LocationsModel>>()
     val errorMessage = MutableLiveData<String>()
     val internetCheckData = MutableLiveData<Boolean>()
+    val progressLiveData = MutableLiveData<Boolean>()
     private val disposable=CompositeDisposable()
 
     fun getLocations(context:Context, location:String){
-
+    progressLiveData.value=false
     viewModelScope.launch {
 
         if (internetCheck(context)) {
-
             internetCheckData.value=true
+            progressLiveData.value=true
             disposable.add(
 
                 repository.getLocations(location)
@@ -35,6 +36,7 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
                     .subscribeWith(object : DisposableSingleObserver<List<LocationsModel>>() {
                         override fun onSuccess(t: List<LocationsModel>) {
                             locations.value = t
+                            progressLiveData.value=false
                         }
 
                         override fun onError(e: Throwable) {
@@ -47,6 +49,7 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
         }
         else{
             internetCheckData.value=false
+            progressLiveData.value=false
         }
 
     }

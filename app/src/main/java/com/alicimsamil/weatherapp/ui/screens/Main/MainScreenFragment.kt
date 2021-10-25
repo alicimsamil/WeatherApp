@@ -1,12 +1,14 @@
 package com.alicimsamil.weatherapp.ui.screens.Main
 
 import android.app.AlertDialog
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -27,6 +29,7 @@ class MainScreenFragment : Fragment() {
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: MainScreenAdapter
     private lateinit var searchMainButton: ImageButton
+    private lateinit var mainProgressBar: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,14 +43,24 @@ class MainScreenFragment : Fragment() {
         viewModel = ViewModelProvider(this,
             MainViewModelFactory(WeatherRepository(WeatherRetrofit()))
         ).get(MainScreenViewModel::class.java)
+        searchMainButton = view.findViewById(R.id.searchMainBtn)
         recyclerView = view.findViewById(R.id.mainRecyclerView)
+        mainProgressBar = view.findViewById(R.id.mainProgressBar)
         val linearLayout = LinearLayoutManager(context)
         recyclerView.layoutManager=linearLayout
         adapter = MainScreenAdapter()
         recyclerView.adapter=adapter
         observeLocations()
 
-        searchMainButton = view.findViewById(R.id.searchMainBtn)
+        viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
+            if (it){
+                mainProgressBar.visibility=View.VISIBLE
+            }
+            else{
+                mainProgressBar.visibility=View.GONE
+            }
+        })
+
         searchMainButton.setOnClickListener(View.OnClickListener {
 
             val action = MainScreenFragmentDirections.actionMainFragmentToSearchScreenFragment()
@@ -58,6 +71,9 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun observeLocations(){
+        context?.let {
+            viewModel.getLocations(it,args.latlng)
+        }
 
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
@@ -68,20 +84,15 @@ class MainScreenFragment : Fragment() {
                     exitProcess(-1)
                 }
                 alertDialog.show()
+            } else{
+                viewModel.locations.observe(viewLifecycleOwner, Observer {
+                    adapter.locations=it
+                })
             }
 
         })
 
-        context?.let {
-            viewModel.getLocations(it,args.latlng)
-        }
-
-        viewModel.locations.observe(viewLifecycleOwner, Observer {
-            adapter.locations=it
-        })
 
     }
-
-
 
 }

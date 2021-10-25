@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +31,7 @@ class SearchScreenFragment : Fragment() {
     private lateinit var searchButton : ImageButton
     private lateinit var city : String
     private lateinit var recyclerView : RecyclerView
+    private lateinit var searchProgressBar: ProgressBar
     private lateinit var adapter: SearchScreenAdapter
 
     override fun onCreateView(
@@ -46,11 +48,22 @@ class SearchScreenFragment : Fragment() {
         viewModel = ViewModelProvider(this, SearchViewModelFactory(WeatherRepository(WeatherRetrofit()))).get(SearchScreenViewModel::class.java)
         searchButton = view.findViewById(R.id.searchBtn)
         searchEditText = view.findViewById(R.id.searchEditText)
+        searchProgressBar=view.findViewById(R.id.searchProgressBar)
         recyclerView = view.findViewById(R.id.searchRecyclerView)
         val linearLayout = LinearLayoutManager(context)
         recyclerView.layoutManager=linearLayout
         adapter = SearchScreenAdapter()
         recyclerView.adapter=adapter
+
+
+        viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
+            if (it){
+                searchProgressBar.visibility=View.VISIBLE
+            }
+            else{
+                searchProgressBar.visibility=View.GONE
+            }
+        })
 
 
         searchButton.setOnClickListener(View.OnClickListener {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +35,7 @@ class DetailScreenFragment : Fragment() {
     private lateinit var locationWeatherIcon: ImageView
     private lateinit var weeklyWeatherStatus : TextView
     private lateinit var weatherIconImageView : ImageView
+    private lateinit var detailProgressBar: ProgressBar
     private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: DetailScreenAdapter
 
@@ -57,6 +59,19 @@ class DetailScreenFragment : Fragment() {
         weeklyWeatherStatus = view.findViewById(R.id.weeklyWeatherStatus)
         weatherIconImageView = view.findViewById(R.id.weatherIcon)
         recyclerView = view.findViewById(R.id.detailRecyclerView)
+        detailProgressBar = view.findViewById(R.id.detailProgressBar)
+
+
+
+        viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
+            if (it){
+                detailProgressBar.visibility=View.VISIBLE
+            }
+            else{
+                detailProgressBar.visibility=View.GONE
+            }
+        })
+
 
         val linearLayout = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
         recyclerView.layoutManager =linearLayout
