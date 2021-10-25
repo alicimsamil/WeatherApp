@@ -54,10 +54,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
-        android:layout_width="411dp"
-        android:layout_height="339dp"
+        android:layout_width="match_parent"
+        android:layout_height="421dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="25dp"
+        android:foregroundGravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        app:layout_constraintVertical_bias="0.692" />
 </androidx.constraintlayout.widget.ConstraintLayout>

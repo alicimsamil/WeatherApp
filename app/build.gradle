@@ -60,7 +60,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.2"
     //Vector/SVG
     //noinspection GradleCompatible
-    implementation("com.android.support:appcompat-v7:23.2.0")
+    implementation "com.android.support:appcompat-v7:23.2.0"
 
 
 }
