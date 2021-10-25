@@ -1,5 +1,6 @@
 package com.alicimsamil.weatherapp.ui.screens.Splash
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -28,13 +29,14 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         CoroutineScope(Dispatchers.Main).launch {
-            observeInternet()
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
             delay(3000)
         }
 
     }
-
 
 
     fun observeInternet(){
@@ -43,7 +45,7 @@ class SplashScreenFragment : Fragment() {
         }
         viewModel.internetStatus.observe(viewLifecycleOwner, Observer {
             if (it){
-                observeLocation()
+               observeLocation()
             }
             else if(!it){
                 val alertDialog = AlertDialog.Builder(context)
@@ -76,10 +78,10 @@ class SplashScreenFragment : Fragment() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 2) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+                observeInternet()
             }
             else {
-                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "İzin verilmedi.", Toast.LENGTH_SHORT).show()
             }
         }
     }

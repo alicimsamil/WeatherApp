@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,7 +43,7 @@ class SplashScreenViewModel : ViewModel(),LocationListener {
 
             }
             else -> {
-                ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
+                requestPermissions(context as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
             }
         }
 
