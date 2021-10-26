@@ -1,7 +1,6 @@
 package com.alicimsamil.weatherapp.ui.screens.Splash
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +15,6 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel.SplashScreenViewModel
 import kotlinx.coroutines.*
-import kotlin.system.exitProcess
 
 class SplashScreenFragment : Fragment() {
     private val viewModel: SplashScreenViewModel by viewModels()

@@ -1,6 +1,5 @@
 package com.alicimsamil. weatherapp.ui.screens.Detail
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +21,6 @@ import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.util.weatherIconPicker
 import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailViewModelFactory
-import kotlin.system.exitProcess
 
 
 class DetailScreenFragment : Fragment() {

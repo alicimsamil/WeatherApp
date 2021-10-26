@@ -1,6 +1,6 @@
 package com.alicimsamil.weatherapp.ui.screens.Search
 
-import android.app.AlertDialog
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,16 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alicimsamil.weatherapp.R
-import com.alicimsamil.weatherapp.adapter.MainScreenAdapter
 import com.alicimsamil.weatherapp.adapter.SearchScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
 import com.alicimsamil.weatherapp.util.internetAlertDialogShow
-import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainScreenViewModel
-import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainViewModelFactory
 import com.alicimsamil.weatherapp.viewmodel.SearchScreenViewModel.SearchScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.SearchScreenViewModel.SearchViewModelFactory
-import kotlin.system.exitProcess
 
 
 class SearchScreenFragment : Fragment() {
