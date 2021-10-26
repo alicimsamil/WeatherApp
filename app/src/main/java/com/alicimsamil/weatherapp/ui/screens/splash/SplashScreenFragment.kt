@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.Splash
+package com.alicimsamil.weatherapp.ui.screens.splash
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.util.internetAlertDialogShow
-import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel.SplashScreenViewModel
+import com.alicimsamil.weatherapp.viewmodel.splashscreenviewmodel.SplashScreenViewModel
 import kotlinx.coroutines.*
 
 class SplashScreenFragment : Fragment() {

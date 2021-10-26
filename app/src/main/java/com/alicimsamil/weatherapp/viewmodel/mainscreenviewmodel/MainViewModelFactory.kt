@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel
+package com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

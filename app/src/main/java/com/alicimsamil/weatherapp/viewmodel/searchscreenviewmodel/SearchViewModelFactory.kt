@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.viewmodel.SearchScreenViewModel
+package com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

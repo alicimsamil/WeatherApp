@@ -9,8 +9,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.model.CityLocationModel
-import com.alicimsamil.weatherapp.ui.screens.Main.MainScreenFragmentDirections
-import com.alicimsamil.weatherapp.ui.screens.Search.SearchScreenFragmentDirections
+import com.alicimsamil.weatherapp.ui.screens.search.SearchScreenFragmentDirections
 
 class SearchScreenAdapter : RecyclerView.Adapter<SearchViewHolder>() {
     var locations = listOf<CityLocationModel>()

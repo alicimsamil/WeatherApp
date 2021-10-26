@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.Main
+package com.alicimsamil.weatherapp.ui.screens.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,75 +17,59 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.MainScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
+import com.alicimsamil.weatherapp.databinding.FragmentMainBinding
 import com.alicimsamil.weatherapp.util.internetAlertDialogShow
-import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainScreenViewModel
-import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainViewModelFactory
-import kotlin.system.exitProcess
+import com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel.MainScreenViewModel
+import com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel.MainViewModelFactory
 
 class MainScreenFragment : Fragment() {
-    val args:MainScreenFragmentArgs by navArgs()
+    val args: MainScreenFragmentArgs by navArgs()
     private lateinit var viewModel: MainScreenViewModel
-    private lateinit var recyclerView : RecyclerView
     private lateinit var adapter: MainScreenAdapter
-    private lateinit var searchMainButton: ImageButton
-    private lateinit var mainProgressBar: ProgressBar
+    private lateinit var binding: FragmentMainBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this,
+        viewModel = ViewModelProvider(
+            this,
             MainViewModelFactory(WeatherRepository(WeatherRetrofit()))
         ).get(MainScreenViewModel::class.java)
-        searchMainButton = view.findViewById(R.id.searchMainBtn)
-        recyclerView = view.findViewById(R.id.mainRecyclerView)
-        mainProgressBar = view.findViewById(R.id.mainProgressBar)
-        val linearLayout = LinearLayoutManager(context)
-        recyclerView.layoutManager=linearLayout
         adapter = MainScreenAdapter()
-        recyclerView.adapter=adapter
+        binding.mainRecyclerView.adapter = adapter
         observeLocations()
 
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
-            if (it){
-                mainProgressBar.visibility=View.VISIBLE
-            }
-            else{
-                mainProgressBar.visibility=View.GONE
-            }
+            if (it) binding.mainProgressBar.visibility =
+                View.VISIBLE else binding.mainProgressBar.visibility = View.GONE
         })
 
-        searchMainButton.setOnClickListener(View.OnClickListener {
-
+        binding.searchMainBtn.setOnClickListener {
             val action = MainScreenFragmentDirections.actionMainFragmentToSearchScreenFragment()
             Navigation.findNavController(it).navigate(action)
-
-        })
-
+        }
     }
 
-    private fun observeLocations(){
+    private fun observeLocations() {
         context?.let {
-            viewModel.getLocations(it,args.latlng)
+            viewModel.getLocations(it, args.latlng)
         }
 
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
                 context?.let { it -> internetAlertDialogShow(it) }
-            } else{
+            } else {
                 viewModel.locations.observe(viewLifecycleOwner, Observer {
-                    adapter.locations=it
+                    adapter.locations = it
                 })
             }
-
         })
-
-
     }
-
 }

@@ -9,7 +9,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.model.LocationsModel
-import com.alicimsamil.weatherapp.ui.screens.Main.MainScreenFragmentDirections
+import com.alicimsamil.weatherapp.ui.screens.main.MainScreenFragmentDirections
 
 class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
     var locations = listOf<LocationsModel>()

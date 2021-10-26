@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.Search
+package com.alicimsamil.weatherapp.ui.screens.search
 
 
 import android.os.Bundle
@@ -17,59 +17,53 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.SearchScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
+import com.alicimsamil.weatherapp.databinding.FragmentSearchScreenBinding
 import com.alicimsamil.weatherapp.util.internetAlertDialogShow
-import com.alicimsamil.weatherapp.viewmodel.SearchScreenViewModel.SearchScreenViewModel
-import com.alicimsamil.weatherapp.viewmodel.SearchScreenViewModel.SearchViewModelFactory
+import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchScreenViewModel
+import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchViewModelFactory
 
 
 class SearchScreenFragment : Fragment() {
     private lateinit var viewModel: SearchScreenViewModel
-    private lateinit var searchEditText : EditText
-    private lateinit var searchButton : ImageButton
-    private lateinit var city : String
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var searchProgressBar: ProgressBar
+    private lateinit var searchEditText: EditText
+    private lateinit var searchButton: ImageButton
+    private lateinit var city: String
+    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SearchScreenAdapter
+    private lateinit var binding:FragmentSearchScreenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_search_screen, container, false)
+        binding= FragmentSearchScreenBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, SearchViewModelFactory(WeatherRepository(WeatherRetrofit()))).get(SearchScreenViewModel::class.java)
-        searchButton = view.findViewById(R.id.searchBtn)
-        searchEditText = view.findViewById(R.id.searchEditText)
-        searchProgressBar=view.findViewById(R.id.searchProgressBar)
-        recyclerView = view.findViewById(R.id.searchRecyclerView)
-        val linearLayout = LinearLayoutManager(context)
-        recyclerView.layoutManager=linearLayout
+        viewModel = ViewModelProvider(
+            this,
+            SearchViewModelFactory(WeatherRepository(WeatherRetrofit()))
+        ).get(SearchScreenViewModel::class.java)
         adapter = SearchScreenAdapter()
-        recyclerView.adapter=adapter
+        binding.searchRecyclerView.adapter=adapter
 
 
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
-            if (it){
-                searchProgressBar.visibility=View.VISIBLE
-            }
-            else{
-                searchProgressBar.visibility=View.GONE
-            }
+            if (it) binding.searchProgressBar.visibility = View.VISIBLE else binding.searchProgressBar.visibility =
+                View.GONE
         })
 
-        searchButton.setOnClickListener(View.OnClickListener {
-            city=searchEditText.text.toString()
+        binding.searchBtn.setOnClickListener {
+            city = binding.searchEditText.text.toString()
             getCities(city)
-        })
+        }
 
     }
 
-    fun getCities(cityName:String){
+    fun getCities(cityName: String) {
 
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
@@ -79,12 +73,12 @@ class SearchScreenFragment : Fragment() {
         })
 
         context?.let {
-            viewModel.getCityLocation(it,cityName)
+            viewModel.getCityLocation(it, cityName)
         }
 
 
         viewModel.cityLocation.observe(viewLifecycleOwner, Observer {
-            adapter.locations=it
+            adapter.locations = it
         })
 
     }

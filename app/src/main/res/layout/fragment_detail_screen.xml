@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.screens.Detail.DetailScreenFragment">
+    tools:context=".ui.screens.detail.DetailScreenFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detailRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="176dp"
         android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
