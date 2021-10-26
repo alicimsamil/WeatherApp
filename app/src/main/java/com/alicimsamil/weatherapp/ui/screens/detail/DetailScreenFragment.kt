@@ -26,7 +26,7 @@ import com.alicimsamil.weatherapp.viewmodel.detailscreenviewmodel.DetailViewMode
 
 class DetailScreenFragment : Fragment() {
 
-    val args: DetailScreenFragmentArgs by navArgs()
+    private val args: DetailScreenFragmentArgs by navArgs()
     private lateinit var viewModel: DetailScreenViewModel
     private lateinit var adapter: DetailScreenAdapter
     private lateinit var binding: FragmentDetailScreenBinding

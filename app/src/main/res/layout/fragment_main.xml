@@ -36,8 +36,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="406dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="25dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -53,16 +53,17 @@
         android:id="@+id/searchMainBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:background="@drawable/main_search_button_shape"
+        android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/search"
-        android:padding="10dp"
-        android:background="@drawable/main_search_button_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.026"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ProgressBar
         android:id="@+id/mainProgressBar"
