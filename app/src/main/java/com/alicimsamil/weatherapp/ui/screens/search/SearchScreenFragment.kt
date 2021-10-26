@@ -25,10 +25,7 @@ import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchViewMode
 
 class SearchScreenFragment : Fragment() {
     private lateinit var viewModel: SearchScreenViewModel
-    private lateinit var searchEditText: EditText
-    private lateinit var searchButton: ImageButton
     private lateinit var city: String
-    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SearchScreenAdapter
     private lateinit var binding:FragmentSearchScreenBinding
 
@@ -50,7 +47,6 @@ class SearchScreenFragment : Fragment() {
         adapter = SearchScreenAdapter()
         binding.searchRecyclerView.adapter=adapter
 
-
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
             if (it) binding.searchProgressBar.visibility = View.VISIBLE else binding.searchProgressBar.visibility =
                 View.GONE
@@ -60,7 +56,6 @@ class SearchScreenFragment : Fragment() {
             city = binding.searchEditText.text.toString()
             getCities(city)
         }
-
     }
 
     fun getCities(cityName: String) {
@@ -69,13 +64,11 @@ class SearchScreenFragment : Fragment() {
             if (!it) {
                 context?.let { it -> internetAlertDialogShow(it) }
             }
-
         })
 
         context?.let {
             viewModel.getCityLocation(it, cityName)
         }
-
 
         viewModel.cityLocation.observe(viewLifecycleOwner, Observer {
             adapter.locations = it
