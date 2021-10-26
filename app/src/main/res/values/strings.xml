@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">WeatherApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="weeklyWeather">Haftalık Hava Durumu</string>
+    <string name="internetStatus">İnternet Bağlantısı</string>
+    <string name="internetFail">İnternete bağlanılamadı.</string>
+    <string name="exit">Çıkış Yap</string>
+    <string name="permissionDenied">İzin verilmedi.</string>
 </resources>

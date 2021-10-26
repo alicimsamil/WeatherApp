@@ -18,6 +18,7 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.DetailScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
+import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.util.weatherIconPicker
 import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailViewModelFactory
@@ -62,8 +63,6 @@ class DetailScreenFragment : Fragment() {
         recyclerView = view.findViewById(R.id.detailRecyclerView)
         detailProgressBar = view.findViewById(R.id.detailProgressBar)
 
-
-
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
             if (it){
                 detailProgressBar.visibility=View.VISIBLE
@@ -73,14 +72,12 @@ class DetailScreenFragment : Fragment() {
             }
         })
 
-
         val linearLayout = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
         recyclerView.layoutManager =linearLayout
         adapter = context?.let { DetailScreenAdapter(it) }!!
         recyclerView.adapter=adapter
 
     }
-
 
 
     fun observeWeather(){
@@ -94,13 +91,7 @@ class DetailScreenFragment : Fragment() {
 
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
-                val alertDialog = AlertDialog.Builder(context)
-                alertDialog.setTitle("İnternet Bağlantısı")
-                alertDialog.setMessage("İnternete bağlanılamadı.")
-                alertDialog.setPositiveButton("Çıkış Yap") { dialog, which ->
-                    exitProcess(-1)
-                }
-                alertDialog.show()
+                context?.let { it -> internetAlertDialogShow(it) }
             }
 
         })
@@ -108,7 +99,7 @@ class DetailScreenFragment : Fragment() {
         viewModel.weatherModel.observe(viewLifecycleOwner, Observer {
             val todayWeather = it.consolidated_weather.get(0)
             cityTextView.text=args.city
-            weeklyWeatherStatus.text="Haftalık Hava Durumu"
+            weeklyWeatherStatus.text=getString(R.string.weeklyWeather)
             humidityImageView.setImageDrawable(resources.getDrawable(R.drawable.humidity,context?.theme))
             locationWeatherIcon.setImageDrawable(resources.getDrawable(R.drawable.location,context?.theme))
             celsiusTextView.text  ="${todayWeather.the_temp.toInt()}°C"
@@ -116,15 +107,7 @@ class DetailScreenFragment : Fragment() {
             humidityTextView.text="Nem Oranı: ${todayWeather.humidity}"
             weatherIconImageView.setImageDrawable(context?.let { it -> weatherIconPicker(todayWeather.weather_state_abbr, it) })
             adapter.weather=it.consolidated_weather.subList(1,6)
-
         })
 
-
-
     }
-
-
-
-
-
 }

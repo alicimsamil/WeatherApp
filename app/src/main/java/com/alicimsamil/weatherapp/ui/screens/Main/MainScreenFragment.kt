@@ -19,6 +19,7 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.MainScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
+import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.MainScreenViewModel.MainViewModelFactory
 import kotlin.system.exitProcess
@@ -77,13 +78,7 @@ class MainScreenFragment : Fragment() {
 
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
-                val alertDialog = AlertDialog.Builder(context)
-                alertDialog.setTitle("İnternet Bağlantısı")
-                alertDialog.setMessage("İnternete bağlanılamadı.")
-                alertDialog.setPositiveButton("Çıkış Yap") { dialog, which ->
-                    exitProcess(-1)
-                }
-                alertDialog.show()
+                context?.let { it -> internetAlertDialogShow(it) }
             } else{
                 viewModel.locations.observe(viewLifecycleOwner, Observer {
                     adapter.locations=it

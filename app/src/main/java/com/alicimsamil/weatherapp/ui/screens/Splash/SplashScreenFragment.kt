@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.alicimsamil.weatherapp.R
+import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.viewmodel.SplashScreenViewModel.SplashScreenViewModel
 import kotlinx.coroutines.*
 import kotlin.system.exitProcess
@@ -28,8 +29,6 @@ class SplashScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         CoroutineScope(Dispatchers.Main).launch {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
@@ -48,20 +47,12 @@ class SplashScreenFragment : Fragment() {
                observeLocation()
             }
             else if(!it){
-                val alertDialog = AlertDialog.Builder(context)
-                alertDialog.setTitle("İnternet Bağlantısı")
-                alertDialog.setMessage("İnternete bağlanılamadı.")
-                alertDialog.setPositiveButton("Çıkış Yap"){ dialog, which ->
-                    exitProcess(-1)
-                }
-                alertDialog.show()
+                context?.let { it -> internetAlertDialogShow(it) }
             }
 
         })
 
     }
-
-
 
     fun observeLocation(){
         context?.let {
@@ -74,14 +65,13 @@ class SplashScreenFragment : Fragment() {
         })
     }
 
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 2) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 observeInternet()
             }
             else {
-                Toast.makeText(context, "İzin verilmedi.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.permissionDenied), Toast.LENGTH_SHORT).show()
             }
         }
     }
