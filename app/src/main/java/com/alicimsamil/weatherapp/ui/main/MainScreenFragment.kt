@@ -40,6 +40,7 @@ class MainScreenFragment : Fragment() {
         binding.mainRecyclerView.adapter = adapter
         observeLocations()
 
+        //Shows progress bar when fetching data
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
             if (it) binding.mainProgressBar.visibility =
                 View.VISIBLE else binding.mainProgressBar.visibility = View.GONE
@@ -51,6 +52,7 @@ class MainScreenFragment : Fragment() {
         }
     }
 
+    //That livedata gets locations from view model
     private fun observeLocations() {
         context?.let {
             viewModel.getLocations(it, args.latlng)

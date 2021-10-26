@@ -31,11 +31,8 @@ class SplashScreenViewModel : ViewModel(), LocationListener {
     fun getLocation(context: Context) {
 
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        when {
-            ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> {
+        when (ContextCompat.checkSelfPermission(context,Manifest.permission.ACCESS_FINE_LOCATION)){
+            PackageManager.PERMISSION_GRANTED -> {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5f, this)
 
             }

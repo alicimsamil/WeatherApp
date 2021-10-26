@@ -5,6 +5,8 @@ import android.content.Context
 import com.alicimsamil.weatherapp.R
 import kotlin.system.exitProcess
 
+//Alert Dialog that will be displayed on the screen in case of no internet
+
 fun internetAlertDialogShow(context: Context){
 
 

@@ -19,13 +19,13 @@ class SearchScreenFragment : Fragment() {
     private lateinit var viewModel: SearchScreenViewModel
     private lateinit var city: String
     private lateinit var adapter: SearchScreenAdapter
-    private lateinit var binding:FragmentSearchScreenBinding
+    private lateinit var binding: FragmentSearchScreenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentSearchScreenBinding.inflate(inflater,container,false)
+        binding = FragmentSearchScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,13 +37,16 @@ class SearchScreenFragment : Fragment() {
             SearchViewModelFactory(WeatherRepository(WeatherRetrofit()))
         ).get(SearchScreenViewModel::class.java)
         adapter = SearchScreenAdapter()
-        binding.searchRecyclerView.adapter=adapter
+        binding.searchRecyclerView.adapter = adapter
 
+        //Shows progress bar when fetching data
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
-            if (it) binding.searchProgressBar.visibility = View.VISIBLE else binding.searchProgressBar.visibility =
+            if (it) binding.searchProgressBar.visibility =
+                View.VISIBLE else binding.searchProgressBar.visibility =
                 View.GONE
         })
 
+        // getCities function called with text from edittext when button is pressed
         binding.searchBtn.setOnClickListener {
             city = binding.searchEditText.text.toString()
             getCities(city)
@@ -51,7 +54,7 @@ class SearchScreenFragment : Fragment() {
     }
 
     fun getCities(cityName: String) {
-
+        //If network connection is disable that livedata shows a alert dialog
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
                 context?.let { it -> internetAlertDialogShow(it) }
@@ -61,7 +64,7 @@ class SearchScreenFragment : Fragment() {
         context?.let {
             viewModel.getCityLocation(it, cityName)
         }
-
+        //That livedata gets cities from view model
         viewModel.cityLocation.observe(viewLifecycleOwner, Observer {
             adapter.locations = it
         })

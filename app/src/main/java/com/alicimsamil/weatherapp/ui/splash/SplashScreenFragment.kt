@@ -28,7 +28,10 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // We use coroutine to prevent the interface from being blocked during the operations.
         CoroutineScope(Dispatchers.Main).launch {
+
+            //Request GPS permission
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
             delay(3000)
         }

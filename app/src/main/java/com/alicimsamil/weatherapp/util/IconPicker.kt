@@ -5,6 +5,9 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import com.alicimsamil.weatherapp.R
 
+
+//Snippet to ensure correct mapping of weather icons from MetaWeather API
+
 @SuppressLint("UseCompatLoadingForDrawables")
 fun weatherIconPicker(weatherAbbreviation: String, context: Context): Drawable {
 

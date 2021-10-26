@@ -41,13 +41,10 @@ class DetailScreenFragment : Fragment() {
             DetailViewModelFactory(WeatherRepository(WeatherRetrofit()))
         ).get(DetailScreenViewModel::class.java)
         observeWeather()
-
+        //Shows progress bar when fetching data
         viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.detailProgressBar.visibility = View.VISIBLE
-            } else {
-                binding.detailProgressBar.visibility = View.GONE
-            }
+            if (it) binding.detailProgressBar.visibility =
+                View.VISIBLE else binding.detailProgressBar.visibility = View.GONE
         })
 
         adapter = context?.let { DetailScreenAdapter(it) }!!
@@ -61,6 +58,7 @@ class DetailScreenFragment : Fragment() {
             viewModel.getWeather(it, woeid)
         }
 
+        //If network connection is disable that livedata shows a alert dialog
         viewModel.internetCheckData.observe(viewLifecycleOwner, Observer {
             if (!it) {
                 context?.let { it -> internetAlertDialogShow(it) }
@@ -68,6 +66,7 @@ class DetailScreenFragment : Fragment() {
 
         })
 
+        //That livedata gets detail weather from view model
         viewModel.weatherModel.observe(viewLifecycleOwner, Observer {
             val todayWeather = it.consolidated_weather.get(0)
             binding.apply {
