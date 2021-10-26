@@ -5,11 +5,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
-    suspend fun internetCheck(context: Context) : Boolean{
+fun internetCheck(context: Context): Boolean {
 
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
         val network = connectivityManager.activeNetwork ?: return false
         val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
@@ -23,13 +24,11 @@ import android.os.Build
 
     } else {
 
-        @Suppress("DEPRECATION") val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+        @Suppress("DEPRECATION") val networkInfo =
+            connectivityManager.activeNetworkInfo ?: return false
         @Suppress("DEPRECATION") return networkInfo.isConnected
 
     }
-
-
-
 
 
 }
