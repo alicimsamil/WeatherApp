@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.alicimsamil.weatherapp.adapter.AdapterClickListener
 import com.alicimsamil.weatherapp.adapter.MainScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
@@ -17,7 +19,7 @@ import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel.MainScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel.MainViewModelFactory
 
-class MainScreenFragment : Fragment() {
+class MainScreenFragment : Fragment() ,AdapterClickListener{
     private val args: MainScreenFragmentArgs by navArgs()
     private lateinit var viewModel: MainScreenViewModel
     private lateinit var adapter: MainScreenAdapter
@@ -36,7 +38,7 @@ class MainScreenFragment : Fragment() {
             this,
             MainViewModelFactory(WeatherRepository(WeatherRetrofit()))
         ).get(MainScreenViewModel::class.java)
-        adapter = MainScreenAdapter()
+        adapter = MainScreenAdapter(this)
         binding.mainRecyclerView.adapter = adapter
         observeLocations()
 
@@ -67,5 +69,10 @@ class MainScreenFragment : Fragment() {
                 })
             }
         })
+    }
+
+    override fun onItemClicked(woeid: String, city: String) {
+        val action=MainScreenFragmentDirections.actionMainFragmentToDetailScreenFragment(woeid,city)
+        findNavController().navigate(action)
     }
 }

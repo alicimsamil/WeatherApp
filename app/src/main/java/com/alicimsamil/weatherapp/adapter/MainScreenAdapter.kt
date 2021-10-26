@@ -11,7 +11,8 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.model.LocationsModel
 import com.alicimsamil.weatherapp.ui.main.MainScreenFragmentDirections
 
-class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
+class MainScreenAdapter(private val mainClickListener: AdapterClickListener) :
+    RecyclerView.Adapter<MainViewHolder>() {
     var locations = listOf<LocationsModel>()
         set(value) {
             field = value
@@ -19,17 +20,17 @@ class MainScreenAdapter : RecyclerView.Adapter<MainViewHolder>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.location_recycler_shape,parent,false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.location_recycler_shape, parent, false)
         return MainViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val locationText= holder.itemView.findViewById<TextView>(R.id.locationTitle)
+        val locationText = holder.itemView.findViewById<TextView>(R.id.locationTitle)
         val locationButton = holder.itemView.findViewById<ConstraintLayout>(R.id.locationButton)
-        locationText.text=locations.get(position).title
+        locationText.text = locations.get(position).title
         locationButton.setOnClickListener {
-            val action=MainScreenFragmentDirections.actionMainFragmentToDetailScreenFragment(locations.get(position).woeid.toString(),locations.get(position).title)
-            Navigation.findNavController(it).navigate(action)
+            mainClickListener.onItemClicked(locations.get(position).woeid.toString(),locations.get(position).title)
         }
 
     }

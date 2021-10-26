@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.alicimsamil.weatherapp.adapter.AdapterClickListener
 import com.alicimsamil.weatherapp.adapter.SearchScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
@@ -15,7 +17,7 @@ import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchViewModelFactory
 
-class SearchScreenFragment : Fragment() {
+class SearchScreenFragment : Fragment(),AdapterClickListener {
     private lateinit var viewModel: SearchScreenViewModel
     private lateinit var city: String
     private lateinit var adapter: SearchScreenAdapter
@@ -36,7 +38,7 @@ class SearchScreenFragment : Fragment() {
             this,
             SearchViewModelFactory(WeatherRepository(WeatherRetrofit()))
         ).get(SearchScreenViewModel::class.java)
-        adapter = SearchScreenAdapter()
+        adapter = SearchScreenAdapter(this)
         binding.searchRecyclerView.adapter = adapter
 
         //Shows progress bar when fetching data
@@ -68,5 +70,10 @@ class SearchScreenFragment : Fragment() {
         viewModel.cityLocation.observe(viewLifecycleOwner, Observer {
             adapter.locations = it
         })
+    }
+
+    override fun onItemClicked(woeid: String, city: String) {
+        val action= SearchScreenFragmentDirections.actionSearchScreenFragmentToDetailScreenFragment(woeid,city)
+        findNavController().navigate(action)
     }
 }

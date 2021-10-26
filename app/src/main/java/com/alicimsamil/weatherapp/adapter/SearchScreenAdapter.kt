@@ -11,7 +11,7 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.model.CityLocationModel
 import com.alicimsamil.weatherapp.ui.search.SearchScreenFragmentDirections
 
-class SearchScreenAdapter : RecyclerView.Adapter<SearchViewHolder>() {
+class SearchScreenAdapter(private val searchClickListener: AdapterClickListener) : RecyclerView.Adapter<SearchViewHolder>() {
     var locations = listOf<CityLocationModel>()
         set(value) {
             field = value
@@ -28,8 +28,7 @@ class SearchScreenAdapter : RecyclerView.Adapter<SearchViewHolder>() {
         val locationButton = holder.itemView.findViewById<ConstraintLayout>(R.id.locationButton)
         locationText.text=locations.get(position).title
         locationButton.setOnClickListener {
-            val action= SearchScreenFragmentDirections.actionSearchScreenFragmentToDetailScreenFragment(locations.get(position).woeid.toString(),locations.get(position).title)
-            Navigation.findNavController(it).navigate(action)
+            searchClickListener.onItemClicked(locations.get(position).woeid.toString(),locations.get(position).title)
         }
 
     }
