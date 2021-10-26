@@ -18,6 +18,7 @@ import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.DetailScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
+import com.alicimsamil.weatherapp.util.weatherIconPicker
 import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.DetailScreenViewModel.DetailViewModelFactory
 import kotlin.system.exitProcess
@@ -113,23 +114,7 @@ class DetailScreenFragment : Fragment() {
             celsiusTextView.text  ="${todayWeather.the_temp.toInt()}°C"
             minMaxValueTextView.text="Min/Maks Sıcaklık: ${todayWeather.min_temp.toInt()}°C / ${todayWeather.max_temp.toInt()}°C"
             humidityTextView.text="Nem Oranı: ${todayWeather.humidity}"
-
-            when(todayWeather.weather_state_abbr){
-
-                "sn" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sn,context?.theme))
-                "sl" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.sl,context?.theme))
-                "h" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.h,context?.theme))
-                "r" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.t,context?.theme))
-                "hr" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.hr,context?.theme))
-                "lr" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.lr,context?.theme))
-                "s" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.s,context?.theme))
-                "hc" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.hc,context?.theme))
-                "lc" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.lc,context?.theme))
-                "c" -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.c,context?.theme))
-
-                else -> weatherIconImageView.setImageDrawable(resources.getDrawable(R.drawable.c,context?.theme))
-            }
-
+            weatherIconImageView.setImageDrawable(context?.let { it -> weatherIconPicker(todayWeather.weather_state_abbr, it) })
             adapter.weather=it.consolidated_weather.subList(1,6)
 
         })
