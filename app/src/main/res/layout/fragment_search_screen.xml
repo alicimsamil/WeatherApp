@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/search_edittext_shape"
         android:ems="10"
-        android:hint="Search a city"
+        android:hint="Bir konum ara"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingLeft="8dp"
