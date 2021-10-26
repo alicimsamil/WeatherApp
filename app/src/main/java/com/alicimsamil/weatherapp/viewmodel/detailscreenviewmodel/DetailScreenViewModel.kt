@@ -19,35 +19,34 @@ class DetailScreenViewModel(private val repository: WeatherRepository) : ViewMod
     val errorMessage = MutableLiveData<String>()
     val internetCheckData = MutableLiveData<Boolean>()
     val progressLiveData = MutableLiveData<Boolean>()
-    private val disposable= CompositeDisposable()
+    private val disposable = CompositeDisposable()
 
-    fun getWeather(context: Context,woeid:String){
-        progressLiveData.value=false
+    fun getWeather(context: Context, woeid: String) {
+        progressLiveData.value = false
         viewModelScope.launch {
 
             if (internetCheck(context)) {
-                progressLiveData.value=true
-                internetCheckData.value=true
+                progressLiveData.value = true
+                internetCheckData.value = true
                 disposable.add(
                     repository.getWeatherStatus(woeid)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(object : DisposableSingleObserver<WeatherModel>() {
                             override fun onSuccess(t: WeatherModel) {
-                                weatherModel.value=t
-                                progressLiveData.value=false
+                                weatherModel.value = t
+                                progressLiveData.value = false
 
                             }
+
                             override fun onError(e: Throwable) {
-                                errorMessage.value=e.message
+                                errorMessage.value = e.message
                             }
-
                         })
                 )
-
-            } else{
-                internetCheckData.value=false
-                progressLiveData.value=false
+            } else {
+                internetCheckData.value = false
+                progressLiveData.value = false
             }
 
         }

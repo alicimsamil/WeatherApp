@@ -1,19 +1,12 @@
 package com.alicimsamil.weatherapp.ui.search
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.SearchScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
@@ -21,7 +14,6 @@ import com.alicimsamil.weatherapp.databinding.FragmentSearchScreenBinding
 import com.alicimsamil.weatherapp.util.internetAlertDialogShow
 import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchScreenViewModel
 import com.alicimsamil.weatherapp.viewmodel.searchscreenviewmodel.SearchViewModelFactory
-
 
 class SearchScreenFragment : Fragment() {
     private lateinit var viewModel: SearchScreenViewModel
@@ -73,6 +65,5 @@ class SearchScreenFragment : Fragment() {
         viewModel.cityLocation.observe(viewLifecycleOwner, Observer {
             adapter.locations = it
         })
-
     }
 }

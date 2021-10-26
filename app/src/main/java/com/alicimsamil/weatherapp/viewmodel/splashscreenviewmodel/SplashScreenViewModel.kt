@@ -15,44 +15,41 @@ import androidx.lifecycle.viewModelScope
 import com.alicimsamil.weatherapp.util.internetCheck
 import kotlinx.coroutines.launch
 
-class SplashScreenViewModel : ViewModel(),LocationListener {
+class SplashScreenViewModel : ViewModel(), LocationListener {
 
     private lateinit var locationManager: LocationManager
     val internetStatus = MutableLiveData<Boolean>()
     val location = MutableLiveData<Location>()
 
-    fun internetStatusCheck(context:Context){
-
+    fun internetStatusCheck(context: Context) {
         viewModelScope.launch {
-
-            internetStatus.value=internetCheck(context)
-
+            internetStatus.value = internetCheck(context)
         }
-
     }
 
 
-    fun getLocation(context: Context){
+    fun getLocation(context: Context) {
 
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
         when {
-            ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,5f,this)
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5f, this)
 
             }
             else -> {
-                requestPermissions(context as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
+                requestPermissions(
+                    context as Activity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    2
+                )
             }
         }
-
-
     }
 
     override fun onLocationChanged(p0: Location) {
-        location.value=p0
+        location.value = p0
     }
-
-
 }

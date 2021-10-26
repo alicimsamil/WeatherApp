@@ -18,43 +18,38 @@ class SearchScreenViewModel(private val repository: WeatherRepository) : ViewMod
     val errorMessage = MutableLiveData<String>()
     val progressLiveData = MutableLiveData<Boolean>()
     val internetCheckData = MutableLiveData<Boolean>()
-    private val disposable= CompositeDisposable()
+    private val disposable = CompositeDisposable()
 
-
-    fun getCityLocation(context:Context,city:String){
-        progressLiveData.value=false
+    fun getCityLocation(context: Context, city: String) {
+        progressLiveData.value = false
         viewModelScope.launch {
 
             if (internetCheck(context)) {
-                internetCheckData.value=true
-                progressLiveData.value=true
+                internetCheckData.value = true
+                progressLiveData.value = true
                 disposable.add(
 
                     repository.getCityLocation(city)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(object : DisposableSingleObserver<List<CityLocationModel>>() {
+                        .subscribeWith(object :
+                            DisposableSingleObserver<List<CityLocationModel>>() {
                             override fun onSuccess(t: List<CityLocationModel>) {
                                 cityLocation.value = t
-                                progressLiveData.value=false
+                                progressLiveData.value = false
                             }
 
                             override fun onError(e: Throwable) {
-                                errorMessage.value=e.message
+                                errorMessage.value = e.message
                             }
 
                         })
                 )
 
+            } else {
+                internetCheckData.value = false
+                progressLiveData.value = false
             }
-            else{
-                internetCheckData.value=false
-                progressLiveData.value=false
-            }
-
         }
-
-
     }
-
 }

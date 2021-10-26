@@ -5,15 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.alicimsamil.weatherapp.R
 import com.alicimsamil.weatherapp.adapter.MainScreenAdapter
 import com.alicimsamil.weatherapp.data.network.WeatherRetrofit
 import com.alicimsamil.weatherapp.data.repository.WeatherRepository
@@ -23,7 +18,7 @@ import com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel.MainScreenViewMo
 import com.alicimsamil.weatherapp.viewmodel.mainscreenviewmodel.MainViewModelFactory
 
 class MainScreenFragment : Fragment() {
-    val args: MainScreenFragmentArgs by navArgs()
+    private val args: MainScreenFragmentArgs by navArgs()
     private lateinit var viewModel: MainScreenViewModel
     private lateinit var adapter: MainScreenAdapter
     private lateinit var binding: FragmentMainBinding
@@ -34,7 +29,6 @@ class MainScreenFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

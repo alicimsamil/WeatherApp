@@ -19,40 +19,39 @@ class MainScreenViewModel(private val repository: WeatherRepository) : ViewModel
     val errorMessage = MutableLiveData<String>()
     val internetCheckData = MutableLiveData<Boolean>()
     val progressLiveData = MutableLiveData<Boolean>()
-    private val disposable=CompositeDisposable()
+    private val disposable = CompositeDisposable()
 
-    fun getLocations(context:Context, location:String){
-    progressLiveData.value=false
-    viewModelScope.launch {
+    fun getLocations(context: Context, location: String) {
+        progressLiveData.value = false
+        viewModelScope.launch {
 
-        if (internetCheck(context)) {
-            internetCheckData.value=true
-            progressLiveData.value=true
-            disposable.add(
+            if (internetCheck(context)) {
+                internetCheckData.value = true
+                progressLiveData.value = true
+                disposable.add(
 
-                repository.getLocations(location)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(object : DisposableSingleObserver<List<LocationsModel>>() {
-                        override fun onSuccess(t: List<LocationsModel>) {
-                            locations.value = t
-                            progressLiveData.value=false
-                        }
+                    repository.getLocations(location)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(object : DisposableSingleObserver<List<LocationsModel>>() {
+                            override fun onSuccess(t: List<LocationsModel>) {
+                                locations.value = t
+                                progressLiveData.value = false
+                            }
 
-                        override fun onError(e: Throwable) {
-                            errorMessage.value=e.message
-                        }
+                            override fun onError(e: Throwable) {
+                                errorMessage.value = e.message
+                            }
 
-                    })
-            )
+                        })
+                )
+
+            } else {
+                internetCheckData.value = false
+                progressLiveData.value = false
+            }
 
         }
-        else{
-            internetCheckData.value=false
-            progressLiveData.value=false
-        }
-
-    }
 
     }
 

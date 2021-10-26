@@ -19,8 +19,6 @@ class DetailScreenAdapter(val context: Context) : RecyclerView.Adapter<DetailVie
             notifyDataSetChanged()
         }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.weather_recycler_shape,parent,false)
         return DetailViewHolder(itemView)

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import com.alicimsamil.weatherapp.R
 
-
 fun weatherIconPicker(weatherAbbreviation : String, context:Context) : Drawable{
 
     var weatherDrawable : Drawable

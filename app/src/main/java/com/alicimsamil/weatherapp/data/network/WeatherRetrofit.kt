@@ -15,12 +15,6 @@ class WeatherRetrofit {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 
-
         return retrofit.create<WeatherService>(WeatherService::class.java)
-
     }
-
-
-
-
 }
