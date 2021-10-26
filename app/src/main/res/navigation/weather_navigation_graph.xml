@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreen">
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.alicimsamil.weatherapp.ui.screens.splash.SplashScreenFragment"
+        android:name="com.alicimsamil.weatherapp.ui.splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.alicimsamil.weatherapp.ui.screens.main.MainScreenFragment"
+        android:name="com.alicimsamil.weatherapp.ui.main.MainScreenFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <argument
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailScreenFragment"
-        android:name="com.alicimsamil.weatherapp.ui.screens.detail.DetailScreenFragment"
+        android:name="com.alicimsamil.weatherapp.ui.detail.DetailScreenFragment"
         android:label="fragment_detail_screen"
         tools:layout="@layout/fragment_detail_screen" >
         <argument
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchScreenFragment"
-        android:name="com.alicimsamil.weatherapp.ui.screens.search.SearchScreenFragment"
+        android:name="com.alicimsamil.weatherapp.ui.search.SearchScreenFragment"
         android:label="fragment_search_screen"
         tools:layout="@layout/fragment_search_screen" >
         <action

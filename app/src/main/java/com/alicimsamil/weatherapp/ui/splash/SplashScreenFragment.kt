@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.splash
+package com.alicimsamil.weatherapp.ui.splash
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -36,15 +36,14 @@ class SplashScreenFragment : Fragment() {
     }
 
 
-    fun observeInternet(){
+    fun observeInternet() {
         context?.let {
             viewModel.internetStatusCheck(it)
         }
         viewModel.internetStatus.observe(viewLifecycleOwner, Observer {
-            if (it){
-               observeLocation()
-            }
-            else if(!it){
+            if (it) {
+                observeLocation()
+            } else if (!it) {
                 context?.let { it -> internetAlertDialogShow(it) }
             }
 
@@ -52,24 +51,30 @@ class SplashScreenFragment : Fragment() {
 
     }
 
-    fun observeLocation(){
+    private fun observeLocation() {
         context?.let {
             viewModel.getLocation(it)
         }
         viewModel.location.observe(viewLifecycleOwner, Observer {
-            val lltlng = it.latitude.toString()+","+it.longitude.toString()
-            val action = SplashScreenFragmentDirections.actionSplashScreenToMainFragment(lltlng)
+            val lltlng = it.latitude.toString() + "," + it.longitude.toString()
+            val action = SplashScreenFragmentDirections.actionSplashScreenToMainFragment(
+                lltlng
+            )
             view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
         })
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == 2) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 observeInternet()
-            }
-            else {
-                Toast.makeText(context, getString(R.string.permissionDenied), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, getString(R.string.permissionDenied), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

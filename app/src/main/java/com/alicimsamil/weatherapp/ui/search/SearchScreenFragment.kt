@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.search
+package com.alicimsamil.weatherapp.ui.search
 
 
 import android.os.Bundle

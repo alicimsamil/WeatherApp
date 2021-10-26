@@ -1,4 +1,4 @@
-package com.alicimsamil.weatherapp.ui.screens.main
+package com.alicimsamil.weatherapp.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
